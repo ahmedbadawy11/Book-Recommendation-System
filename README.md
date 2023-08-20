@@ -1,3 +1,16 @@
+# Problem Formulation
+
+This project presents a content-based book recommender system that uses natural language processing 
+and machine learning to offer personalized book suggestions based on book summaries. By analyzing 
+book summaries, the system identifies similarities and associations between books, ensuring accurate 
+and relevant recommendations. The goal is to connect readers with books that match their interests, 
+enhancing their reading experience and promoting literature exploration in the digital age.
+
+
+
+
+
+
 # Running the code
 
 We run our code locally on our machines and for the notebook, we preprocess, clean and transform the data into word2vec form.  
