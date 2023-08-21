@@ -6,7 +6,20 @@ book summaries, the system identifies similarities and associations between book
 and relevant recommendations. The goal is to connect readers with books that match their interests, 
 enhancing their reading experience and promoting literature exploration in the digital age.
 
+ # Tech Stack:
+Our chatbot boasts a dynamic tech stack, utilizing Dialogflow for the front end and Flask for the back end, ensuring a seamless and interactive experience. We've crafted two distinct recommendation options:
+1️⃣ Recommendation by Book Name: Share your favorite book, and the chatbot will fetch related suggestions. Perfect for those with a specific book in mind.
+2️⃣ Recommendation by Genre: Immerse yourself in recommendations based on your preferred genre. Ideal for readers seeking fresh perspectives.
 
+# Data Source:
+We've harnessed the power of the CMU Book Summary Dataset on Kaggle, encompassing summaries for an impressive 16,559 books, along with vital metadata such as author, title, and genre. This wealth of information fuels our chatbot's intelligent recommendations.
+
+# Acknowledgments:
+A heartfelt shoutout to our incredible team members:
+
+Anas Ibrahim Ali Elbatra
+Esmael Alahmady Ebrahim Ezz
+Yousef Abd Al Haleem Ahmed Shindy
 
 
 
