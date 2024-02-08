@@ -1,84 +1,57 @@
-# Problem Formulation
+# Book Recommendation System
 
-This project presents a content-based book recommender system that uses natural language processing 
-and machine learning to offer personalized book suggestions based on book summaries. By analyzing 
-book summaries, the system identifies similarities and associations between books, ensuring accurate 
-and relevant recommendations. The goal is to connect readers with books that match their interests, 
-enhancing their reading experience and promoting literature exploration in the digital age.
+## Problem Formulation 📚
+This project presents a content-based book recommender system that utilizes natural language processing (NLP) and machine learning (ML) techniques to offer personalized book suggestions based on book summaries. By analyzing book summaries, the system identifies similarities and associations between books, ensuring accurate and relevant recommendations. The goal is to connect readers with books that match their interests, enhancing their reading experience and promoting literature exploration in the digital age.
 
- # Tech Stack:
-Our chatbot boasts a dynamic tech stack, utilizing Dialogflow for the front end and Flask for the back end, ensuring a seamless and interactive experience. We've crafted two distinct recommendation options:
-1️⃣ Recommendation by Book Name: Share your favorite book, and the chatbot will fetch related suggestions. Perfect for those with a specific book in mind.
-2️⃣ Recommendation by Genre: Immerse yourself in recommendations based on your preferred genre. Ideal for readers seeking fresh perspectives.
+## Data Preparation 📊
+The dataset comprises 16,559 entries with 7 columns:
+- Wikipedia ID: Unique identifier for each book from Wikipedia.
+- Freebase ID: Unique identifier for each book in the Freebase database.
+- Book Title: Title of the book.
+- Book Author: Name of the book's author.
+- Pub Date: Publication date of the book.
+- Genres: Genres associated with the book.
+- Summary: Brief summary of the book.
 
-# Data Source:
-We've harnessed the power of the CMU Book Summary Dataset on Kaggle, encompassing summaries for an impressive 16,559 books, along with vital metadata such as author, title, and genre. This wealth of information fuels our chatbot's intelligent recommendations.
+The data preparation involved:
+- Handling missing values by dropping rows with null values in the Genres column.
+- Word count extraction for the Summary column.
+- Conversion of the Genres column from JSON format to a list of genres.
+- Due to memory limitations, a random sample of 1000 rows was selected for further processing.
 
-# Acknowledgments:
-A heartfelt shoutout to our incredible team members:
+## Text Feature Engineering 🔍
+Text feature engineering included:
+- Lemmatization using WordNet.
+- Tokenization, lowercase conversion, stop word removal, and lemmatization based on parts of speech for the summary text data.
 
-Anas Ibrahim Ali Elbatra
-Esmael Alahmady Ebrahim Ezz
-Yousef Abd Al Haleem Ahmed Shindy
+## Clustering 📊
+The K-Means algorithm was employed for clustering:
+- Determination of the optimal number of clusters using the elbow method.
+- Visualization of clusters using TSNE.
+- Observation of some separation between different clusters.
 
+## Classification 📋
+Classification involved:
+- Preparation of the target column (Genres).
+- Utilization of cluster labels as new genres due to multiple values in the Genres column.
+- Classification using five different models.
 
+## Chatbot 💬
+An interactive chatbot was developed with two options:
+- Recommendation by book name.
+- Recommendation by genre.
+Integration with Dialogflow was achieved via ngrok to establish a secure connection. Recommendations were provided based on book titles or genres, with fallback options for unmatched queries.
 
+## Chatbot Performance 🚀
+The chatbot demonstrated satisfactory performance in pretrained scenarios. It accurately recommended books based on specified genres or book titles from the dataset. However, its performance weakened when prompted with inputs not present in the dataset due to limited training data.
 
-# Running the code
+## Innovativeness 🌟
+Innovative techniques were applied to handle the complexities of the Genres column, including data preprocessing, feature engineering, and clustering. Conversion of JSON data to a list of genres, coupled with clustering and label assignment based on frequent genres, resulted in a dataset with 5 unique labels, simplifying classification based on book summaries.
 
-We run our code locally on our machines and for the notebook, we preprocess, clean and transform the data into word2vec form.  
-We saved this representation into a `csv` file for later use
+---
 
-
-```
-train_data.to_csv("Embeddings.csv" , sep = ";")
-``` 
-
-## Clustering
-We cluster our data and get 5 labels and for each label we check for the most frequent genre to assign this cluster to it manually    
-We use the code to check for the most frequent genre to each cluster 
-
-```
-genres = list()
-for genre in random_sample_0["Genres"]:
-    for i in range(len(genre)):
-        genres.append(genre[i])
-print(Counter(genres))
-```
-* **Note that there is usually two clusters with the same most frequent genres so we assign the genre `Children's literature` to one of them** 
-
-Then assign the genre to all the books in the cluster manually .
-
-
-```
-random_sample.loc[random_sample["labels"] == 0, "Genres"] = "Science Fiction"
-```
-
-After we classify our data we save our dataframe with the all new features to a csv file to use later
-
-```
-random_sample.to_csv("Final_output.csv", index=False, sep=';')
-```
-
-* **Please note that the final accuracies of the model may vary every time we run the notebook because of the randomization of the data.**
-## Chatbot
-After we finished the work on notebook we install the ngrok application.    
-And to start our server we use this command line to provide us with the https link
-
-```
-ngrok http 5000
-```
-
-Then we take this link and paste it in the `Dialogueflow` fulfillment 
-
-```
-https://1889-41-33-218-52.ngrok-free.app/webhook
-```
-
-And to start using our work in the chatbot and `Dialogueflow` we used the presaved dataframes to not rerun the notebook from the begining and instead of using the pickle file.
-
-```
-train_data = pd.read_csv("Embeddings.csv" , sep = ";")
-random_sample = pd.read_csv("Final_output.csv", index=False, sep=';')
-```
-Then we run our .py file to connect the model to the chatbot
+### Team Members 👥
+- Ahmed Badawy
+- Anas Elbatra
+- Esmael Ezz
+- Yousef Shindy
